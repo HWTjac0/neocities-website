@@ -1,24 +1,12 @@
 name: Deploy to neocities
 
-on:
-  push:
-    branches:
-      - main
-
-env:
-  FORCE_COLOR: 1
-
-concurrency: # prevent concurrent deploys doing starnge things
-  group: deploy-to-neocities
-  cancel-in-progress: true
-
+on: [push]
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # When the dist_dir is ready, deploy it to neocities
       - name: Deploy to neocities
-        uses: bcomnes/deploy-to-neocities@v1.1.13 # dont use master in production
+        uses: bcomnes/deploy-to-neocities@v1.1.13
         with:
           api_token: ${{ secrets.NEOCITIES_API_TOKEN }}
           cleanup: true
